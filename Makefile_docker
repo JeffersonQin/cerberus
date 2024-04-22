@@ -1,7 +1,7 @@
 .PHONY: all release dev-env deps
 
 all:
-	@echo 'targets: deps|release|dev-env'
+	@echo 'targets: deps|release|release-cn|dev-env'
 
 deps :
 	docker build --tag cerberus:deps -f Dockerfile.deps .
@@ -9,6 +9,10 @@ deps :
 release: deps
 	docker build --tag cerberus:release -f Dockerfile.release .
 	@echo 'for example: docker run --volume `PWD`:/data/ cerberus:release tests/tcc/00_assignment.c --pp=core'
+
+release-cn: deps
+	docker build --tag cerberus:release-cn -f Dockerfile.release-cn .
+	@echo 'for example: docker run --volume `PWD`:/data/ cerberus:release-cn tests/tcc/00_assignment.c --pp=core'
 
 dev-env: deps
 	docker build --tag cerberus:dev-env -f Dockerfile.dev-env .
